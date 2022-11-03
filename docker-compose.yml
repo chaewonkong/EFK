@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  fluent-bit:
+    image: fluent/fluent-bit
+    volumes:
+      - ./fluent-bit/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
+      - shared:/var/log
+    depends_on:
+      - server
+  
+  server:
+    build: .
+    volumes:
+      - shared:/var/log
+    ports:
+      - "8080:8080"
+volumes:
+  shared:
