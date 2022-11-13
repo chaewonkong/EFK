@@ -5,15 +5,23 @@ services:
     image: fluent/fluent-bit
     volumes:
       - ./fluent-bit/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
-      - shared:/var/log
+      # - shared:/var/log/efk
+      - /var/log/efk:/var/log/efk
     depends_on:
       - server
-  
+      # - elasticsearch
+
   server:
     build: .
     volumes:
-      - shared:/var/log
+      - /var/log/efk:/var/log/efk
+      # - shared:/var/log/efk
     ports:
       - "8080:8080"
-volumes:
-  shared:
+
+  elasticsearch:
+    image: elasticsearch:7.6.2
+    ports:
+      - "9200:9200"
+    environment:
+      - discovery.type=single-node
