@@ -23,7 +23,7 @@ func main() {
 	}))
 
 	e.GET("/", handler)
-	logger.Fatal().Err(e.Start(":1323")).Msg("Server started")
+	logger.Fatal().Err(e.Start(":8080")).Msg("Server started")
 }
 
 func handler(c echo.Context) error {
