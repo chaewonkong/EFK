@@ -15,7 +15,7 @@ func main() {
 		Filename:   "/var/log/efk/request.log",
 		MaxSize:    20, // megabytes
 		MaxBackups: 3,
-		MaxAge:     1, //days
+		MaxAge:     1,    //days
 		Compress:   true, // disabled by default
 	}
 
@@ -30,7 +30,6 @@ func main() {
 		},
 	}))
 
-	
 	e.GET("/", handler)
 	logger.Fatal().Err(e.Start(":8080")).Msg("Server started")
 }
